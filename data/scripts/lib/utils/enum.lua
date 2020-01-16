@@ -1,4 +1,6 @@
-function addNextKeyToEnum(enum, key)
+EnumUtils = {}
+
+function EnumUtils.addNextKey(enum, key)
   max = -1
   for _, val in pairs(enum) do
     if val > max then

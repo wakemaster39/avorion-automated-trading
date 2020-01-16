@@ -1,7 +1,6 @@
-include("data/scripts/lib/enum")
-include("data/scripts/lib/debugging_utils")
+include("data/scripts/lib/utils/enum")
 
-addNextKeyToEnum(OrderButtonType, "Trade")
+EnumUtils.addNextKey(OrderButtonType, "Trade")
 
 if onClient() then
 

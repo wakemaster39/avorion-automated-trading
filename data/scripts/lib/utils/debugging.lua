@@ -29,7 +29,7 @@ function DebuggingUtils.pcall(...)
 
 end
 
-function DebuggingUtils.table_to_string(tbl)
+function DebuggingUtils.table_to_print_string(tbl)
     local result = "{"
     for k, v in pairs(tbl) do
         -- Check the key type (ignore any numerical keys - assume its an array)
