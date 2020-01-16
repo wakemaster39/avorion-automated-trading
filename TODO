@@ -1,0 +1,14 @@
+* Need to implement a "Sector Manager" esque screen
+** Screen should allow you to build a trade filter
+** Trade filter should be able to select an item and apply a rule to purchase
+** Rules should be something like
+*** Mining Robots < 10% market value
+*** Any < 30% market value and current inventory < $$$$$$
+** Need to be able to set a Maximum Cargo value, if carrying $$$ don't buy only sell
+
+* Need to implement serialization for the storage of the trade filters
+
+* With Trade Filters added, tie into the MapCommands and add a new screen like buy order
+** When clicking trade, select the filter you wish to be using
+
+* Implement the actual trade logic last, mostly copy pasta from the actual trade scripts
