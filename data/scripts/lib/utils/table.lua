@@ -2,11 +2,11 @@
 
 TableUtils = {}
 
-function TableUtils.tableToString(table)
+function TableUtils.serialize(table)
 	return "return"..TableUtils.serializeTable(table)
 end
 
-function TableUtils.stringToTable(str)
+function TableUtils.deserialize(str)
 	local f = loadstring(str)
 	return f()
 end
