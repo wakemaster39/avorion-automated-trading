@@ -50,3 +50,14 @@ end
 function UIUtils.centerUIElementX(parent, size)
     return parent.size.x/2 - size, parent.size.x/2 + size
 end
+
+--- Sets the position of a UI element relative to the top left corner of a relative
+-- @param element UIElement to set the position of
+-- @param relativeElement UIElement to position the UIElement relative to
+-- @param vec vec2 to position edges of elements
+function UIUtils.positionRelativeLeft(element, relativeElement, vec)
+    local a = relativeElement.localPosition - vec - element.size
+    print(a.x, a.y)
+    element.localPosition.x = a.x
+    element.localPosition.y = a.y
+end

@@ -120,7 +120,7 @@ if onClient() then
         local y = index * 35
         local labelsize = vec2(130, 35)
         local buttonSize = vec2(32, 32)
-        local bX = {200, 240, 280}
+        local bX = {200, 240, goodsListsScrollframe.size.x - 32 - 30}
 
         local labelText = name
         local sectorLabel = goodsListsScrollframe:createLabel(vec2(5,y), labelText, 12)
@@ -130,9 +130,41 @@ if onClient() then
         sectorLabel.tooltip = "Click to show the sector on the Galaxymap."%_t
         lineElementToIndex[sectorLabel.index] = index
 
+        local upButton = goodsListsScrollframe:createButton(Rect(bX[1],y+2, bX[1]+buttonSize.x,y+2+buttonSize.y ), "", "upButtonPressed")
+        upButton.icon = "data/textures/icons/sectormanager-arrow-up.png"
+        lineElementToIndex[upButton.index] = index
+    
+        local downButton = goodsListsScrollframe:createButton(Rect(bX[2],y+2, bX[2]+buttonSize.x,y+2+buttonSize.y ), "", "downButtonPressed")
+        downButton.icon = "data/textures/icons/sectormanager-arrow-down.png"
+        downButton.active = false
+        lineElementToIndex[downButton.index] = index
+
+        local deleteLabel = goodsListsScrollframe:createLabel(vec2(bX[3],y+2), "", 12)
+        deleteLabel.mouseDownFunction = "deleteLabelPressed"
+        deleteLabel.width = 32
+        deleteLabel.height = 32
+        deleteLabel.tooltip = "Remove sector from List."%_t
+
+        UIUtils.positionRelativeLeft(downButton, deleteLabel, vec2(0,0))
+        
+        lineElementToIndex[deleteLabel.index] = index
+        local deletePic = goodsListsScrollframe:createPicture(Rect(bX[3],y+2, bX[3]+buttonSize.x,y+2+buttonSize.y) , "data/textures/icons/sectormanager-cross-mark.png")
+        deletePic.color = ColorRGB(0.705, 0.165, 0.165)
+        lineElementToIndex[deletePic.index] = index
+
+        goodsListsLines[index] = {sectorLabel = sectorLabel, upButton = upButton, downButton = downButton, deleteLabel = deleteLabel, deletePic = deletePic}
+
         addGoodsListsButton.position = addGoodsListsButton.position + vec2(0,35)
 
-        goodsListsLines[index] = {}
+        if goodsListsLines[index-1] then  -- Make sure that the previous buttons don't allow invalid input
+            local prevLine = goodsListsLines[index-1]
+            prevLine.downButton.active = true
+            prevLine.deleteLabel.tooltip = nil
+            prevLine.deleteLabel.mouseDownFunction = nil
+            prevLine.deletePic.color = ColorRGB(0.2, 0.2, 0.2)
+        else
+            upButton.active = false
+        end
     end
 else
     --====================
